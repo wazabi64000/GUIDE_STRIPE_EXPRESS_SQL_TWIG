@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Produits</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Liste des produits</h1>
+
+  {% for product in products %}
+    <div class="product">
+      <h2>{{ product.name }}</h2>
+      <p>Prix : {{ (product.price / 100)|number_format(2, ',', ' ') }} €</p>
+
+      <form action="/cart/add" method="POST">
+        <input type="hidden" name="productId" value="{{ product.id }}">
+        <label>Quantité :
+          <input type="number" name="quantity" value="1" min="1" max="10">
+        </label>
+        <button type="submit">Ajouter au panier</button>
+      </form>
+    </div>
+    <hr>
+  {% endfor %}
+
+  <a href="/cart">Voir le panier</a>
+</body>
+</html>

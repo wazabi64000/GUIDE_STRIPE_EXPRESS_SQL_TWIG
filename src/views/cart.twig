@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Panier</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Votre Panier</h1>
+
+  {% if items|length == 0 %}
+    <p>Votre panier est vide.</p>
+  {% else %}
+    <table border="1" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Prix Unitaire</th>
+          <th>Quantité</th>
+          <th>Sous-total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ (item.price / 100)|number_format(2, ',', ' ') }} €</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ (item.subtotal / 100)|number_format(2, ',', ' ') }} €</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p>Total : {{ (total / 100)|number_format(2, ',', ' ') }} €</p>
+
+    <form action="/checkout" method="POST">
+      <button type="submit">Payer avec Stripe</button>
+    </form>
+  {% endif %}
+
+  <a href="/">Retour à l'accueil</a>
+</body>
+</html>
