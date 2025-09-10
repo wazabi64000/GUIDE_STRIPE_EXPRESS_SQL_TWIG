@@ -63,7 +63,7 @@ DB_NAME=shop_db
 # Stripe
 STRIPE_SECRET_KEY=sk_test_yourkey
 STRIPE_PUBLIC_KEY=pk_test_yourkey
-
+COOKIE_SECRET=coockies_secret_super_fort
 
 ---
 
